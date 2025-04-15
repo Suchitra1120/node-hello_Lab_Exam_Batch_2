@@ -1,14 +1,12 @@
 apiVersion: v3
 kind: Service
 metadata:
-  labels:
-    app: simple-nodejs-app
-  name: simple-nodejs-app
+  name: nodejs-service
 spec:
-  type: NodePort
-  ports:
-    - port: 3001
-      targetPort: 3001
-      protocol: TCP
   selector:
-    app: simple-nodejs-app
+    app: nodejs
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3001 # The port your Node.js app listens to
+  type: LoadBalancer # or NodePort if you're using minikube or without cloud load balancer
